@@ -4,15 +4,16 @@
  * Fecha de entrega: 18/octubre/2020
  */
 
-package parte1;
+package parte2.punto.uno;
 
-import java.awt.Graphics;
 import javax.swing.JPanel;
+import java.awt.Graphics;
+import java.awt.Color;
 
-public class PlanoCartesiano extends JPanel {
+public class Traslacion extends JPanel {
     private int ancho, alto, anchoCentral, altoCentral;
 
-    public PlanoCartesiano() {
+    public Traslacion() {
         ancho = getSize().width;
         alto = getSize().height;
         anchoCentral = ancho / 2;
@@ -91,7 +92,6 @@ public class PlanoCartesiano extends JPanel {
                     anchoCentral + x[i + 1], altoCentral - y[i + 1]);
             }
 
-            
             // Tercer cuadrante al cuarto cuadrante
             if((x[i] <= 0 && y[i] < 0) && (x[i + 1] > 0 && y[i + 1] < 0)) {
                 g.drawLine(anchoCentral + x[i], altoCentral + y[i] * -1, 
@@ -118,6 +118,28 @@ public class PlanoCartesiano extends JPanel {
     }
 
     /**
+     * Método encargado de hacer la transformación de traslación
+     * @param x Arreglo de las coordenadas X de la figura
+     * @param y Arreglo de las coordenadas Y de la figura
+     * @param tx Traslación en X
+     * @param ty Traslación en Y
+     * @param g Objeto Graphics
+     */
+    private void traslacion(int x[], int y[], int tx, int ty, Graphics g) {
+        int pX[] = new int[x.length];
+        int pY[] = new int[y.length];
+
+        for(int i = 0; i < x.length; i++) {
+            pX[i] = tx + x[i];
+            pY[i] = ty + y[i];
+        }
+
+        g.setColor(Color.RED);
+
+        dibujarFigura(pX, pY, g);
+    }
+
+    /**
      * El método paintComponent() se encarga de dibujar y volver a dibujar 
      * cuando el panel cambia de tamaño
      */
@@ -127,27 +149,16 @@ public class PlanoCartesiano extends JPanel {
 
         dibujarPlano(g);
 
-        // Cuadrado cuadrante uno
-        dibujarFigura(new int[]{50, 250, 250, 50, 50}, 
-            new int[]{50, 50, 250, 250, 50}, g);
+        // Trapecio cudrante cuatro
+        dibujarFigura(new int[]{100, 300, 250, 150, 100}, 
+            new int[]{-200, -200, -25, -25, -200}, g);
 
-        // Triangulo cudrante cuatro
-        dibujarFigura(new int[]{100, 300, 200, 100}, 
-            new int[]{-200, -200, -25, -200}, g);
+        // Traslación A
+        traslacion(new int[]{100, 300, 250, 150, 100}, 
+            new int[]{-200, -200, -25, -25, -200}, 90, -150, g);
 
-        // Romboide segundo cuadrante
-        dibujarFigura(new int[]{-325, -250, -50, -125, -325}, 
-            new int[]{50, 200, 200, 50, 50}, g);
-
-        // Trapecio tercer cuadrante
-        dibujarFigura(new int[]{-200, -125, -50, -125, -200}, 
-            new int[]{-100, -10, -100, -190, -100}, g);
-
-        // Rectangulo cuadrante 2 y 3
-        dibujarFigura(new int[]{-600, -400, -400, -600, -600}, 
-            new int[]{300, 300, -300, -300, 300}, g);
-
-        // Circulo cuadrante 4
-        g.drawOval(anchoCentral, altoCentral, 100, 100);
+        // Traslación B
+        traslacion(new int[]{100, 300, 250, 150, 100}, 
+            new int[]{-200, -200, -25, -25, -200}, -100, 70, g);
     }
 }
