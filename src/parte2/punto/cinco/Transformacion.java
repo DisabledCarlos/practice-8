@@ -4,16 +4,16 @@
  * Fecha de entrega: 18/octubre/2020
  */
 
-package parte2.punto.cuatro;
+package parte2.punto.cinco;
 
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Color;
 
-public class Rotacion extends JPanel {
+public class Transformacion extends JPanel {
     private int ancho, alto, anchoCentral, altoCentral;
 
-    public Rotacion() {
+    public Transformacion() {
         ancho = getSize().width;
         alto = getSize().height;
         anchoCentral = ancho / 2;
@@ -131,48 +131,97 @@ public class Rotacion extends JPanel {
     }
 
     /**
+     * Escalación de una figura sobre sus coordenadas de origen en eje X
+     * @param x Coordenadas de las x de la figura
+     * @param sx Escalación en X
+     */
+    private int[] escalacionOrigenX(int x[], float sx) {
+        int px[] = new int[x.length];
+
+        for(int i = 0; i < x.length; i++) {
+            px[i] = Math.round(x[i] * sx);
+        }
+
+        return px;
+    }
+
+    /**
+     * Escalación de una figura sobre sus coordenadas de origen en el eje Y
+     * @param y Coordenadas de las Y en la figura
+     * @param sy Escalación en Y
+     */
+    private int[] escalacionOrigenY(int y[], float sy) {
+        int py[] = new int[y.length];
+
+        for(int i = 0; i < y.length; i++) {
+            py[i] = Math.round(y[i] * sy);
+        }
+
+        return py;
+    }
+
+    /**
      * Método encargado de hacer una rotación en el origen de
      * las coordenadas
      * @param x Coordenadas en X de la figura 
      * @param y Coordenadas en Y de la figura 
      * @param theta Angulo de rotación
-     * @param c Color de la figura
-     * @param g Graphics g
      */
-    private void rotacionOrigen(int x[], int y[], int theta, Color c, Graphics g) {
+    private int[] rotacionOrigenX(int x[], int y[], int theta) {
         int px[] = new int[x.length];
-        int py[] = new int[y.length];
 
         for(int i = 0; i < x.length; i++) {
             px[i] = (int) (x[i] * Math.cos(theta) - y[i] * Math.sin(theta));
-            py[i] = (int) (x[i] * Math.sin(theta) + y[i] * Math.cos(theta));
         }
 
-        g.setColor(c);
-        dibujarFigura(px, py, g);
+        return px;
     }
 
     /**
-     * Método encargado de hacer una rotación en un punto especifico
-     * @param x Coordenadas en X de la figura
-     * @param y Coordenadas en Y de la figura
-     * @param xr Punto de rotación en X
-     * @param yr Punto de rotación en Y
-     * @param theta Ángulo de rotación de la figrua
-     * @param c Color de la figura
-     * @param g Objeto graphics
+     * Método encargado de hacer una rotación en el origen de
+     * las coordenadas
+     * @param x Coordenadas en X de la figura 
+     * @param y Coordenadas en Y de la figura 
+     * @param theta Angulo de rotación
      */
-    private void rotacionPunto(int x[], int y[], int xr, int yr, int theta, Color c, Graphics g) {
-        int px[] = new int[x.length];
+    private int[] rotacionOrigenY(int x[], int y[], int theta) {
         int py[] = new int[y.length];
 
         for(int i = 0; i < x.length; i++) {
-            px[i] = (int) ((x[i] - xr) * Math.cos(theta) - (y[i] - yr) * Math.sin(theta) + xr);
-            py[i] = (int) ((x[i] - xr) * Math.sin(theta) + (y[i] - yr) * Math.cos(theta) + yr);
+            py[i] = (int) (x[i] * Math.sin(theta) + y[i] * Math.cos(theta));
         }
 
-        g.setColor(c);
-        dibujarFigura(px, py, g);
+        return py;
+    }
+
+    /**
+     * Método encargado de hacer la transformación de traslación en los puntos X
+     * @param x Arreglo de las coordenadas X de la figura
+     * @param tx Traslación en X
+     */
+    private int[] traslacionX(int x[], int tx) {
+        int px[] = new int[x.length];
+
+        for(int i = 0; i < x.length; i++) {
+            px[i] = tx + x[i];
+        }
+
+        return px;
+    }
+
+    /**
+     * Método encargado de hacer la transformación de traslación en los puntos Y
+     * @param y Arreglo de las coordenadas Y de la figura
+     * @param ty Traslación en Y
+     */
+    private int[] traslacionY(int y[], int ty) {
+        int py[] = new int[y.length];
+
+        for(int i = 0; i < y.length; i++) {
+            py[i] = ty + y[i];
+        }
+
+        return py;
     }
 
     /**
@@ -185,34 +234,64 @@ public class Rotacion extends JPanel {
 
         dibujarPlano(g);
 
-        int x[] = new int[]{50, 100, 100, 120, 100, 100, 50, 60, 50};
-        int y[] = new int[]{10, 10, 20, 0, -20, -10, -10, 0, 10};
+        int x[] = new int[]{50, 100, 50, 100, 50};
+        int y[] = new int[]{60, 60, 10, 10, 60};
 
-        // Estrella de cuatro picos en el cuadrante 1
+        // Figura de reloj de arena
         dibujarFigura(x, y, g);
 
-        // Rotación grupo A
-        rotacionOrigen(x, y, 45, Color.RED, g);
-        rotacionOrigen(x, y, 90, Color.RED, g);
-        rotacionOrigen(x, y, 135, Color.RED, g);
-        rotacionOrigen(x, y, 180, Color.RED, g);
+        int px[], py[] = new int[5];
+        
+        
+        g.setColor(Color.RED);
 
-        // Rotación grupo B
-        rotacionPunto(x, y, 85, 0, 45, Color.BLUE, g);
-        rotacionPunto(x, y, 85, 0, 90, Color.BLUE, g);
-        rotacionPunto(x, y, 85, 0, 135, Color.BLUE, g);
-        rotacionPunto(x, y, 85, 0, 180, Color.BLUE, g);
+        // Parte A
+        x = px = escalacionOrigenX(x, 2f);
+        y = py = escalacionOrigenY(y, 2f);
+        dibujarFigura(x, y, g);
 
-        // Rotación grupo C
-        rotacionPunto(x, y, 100, 20, 45, Color.MAGENTA, g);
-        rotacionPunto(x, y, 100, 20, 90, Color.MAGENTA, g);
-        rotacionPunto(x, y, 100, 20, 135, Color.MAGENTA, g);
-        rotacionPunto(x, y, 100, 20, 180, Color.MAGENTA, g);
 
-        // Rotación grupo D
-        rotacionPunto(x, y, 200, -50, 45, Color.YELLOW, g);
-        rotacionPunto(x, y, 200, -50, 90, Color.YELLOW, g);
-        rotacionPunto(x, y, 200, -50, 135, Color.YELLOW, g);
-        rotacionPunto(x, y, 200, -50, 180, Color.YELLOW, g);
+        // Parte B
+        x = rotacionOrigenX(px, py, 45);
+        y = rotacionOrigenY(px, py, 45);
+        px = x;
+        py = y;
+        dibujarFigura(x, y, g);
+        
+        // Parte C
+        x = escalacionOrigenX(px, 1f);
+        y = escalacionOrigenY(py, 0.5f);
+        px = x;
+        py = y;
+        dibujarFigura(x, y, g);
+
+        // Parte D
+        x = traslacionX(px, 50);
+        y = traslacionY(py, -25);
+        px = x;
+        py = y;
+        dibujarFigura(x, y, g);
+
+        // Parte E
+        x = rotacionOrigenX(px, py, 90);
+        y = rotacionOrigenY(px, py, 90);
+        px = x;
+        py = y;
+        dibujarFigura(x, y, g);
+
+        // Parte F
+        x = escalacionOrigenX(px, 1.5f);
+        y = escalacionOrigenY(py, 1f);
+        px = x;
+        py = y;
+        dibujarFigura(x, y, g);
+
+        // Parte G
+        x = traslacionX(px, 20);
+        y = traslacionY(py, 40);
+        px = x;
+        py = y;
+        g.setColor(Color.BLUE);
+        dibujarFigura(x, y, g);
     }
 }
