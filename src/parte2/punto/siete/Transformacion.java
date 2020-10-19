@@ -208,28 +208,28 @@ public class Transformacion extends JPanel {
 
         // Parte D
         rellenarFigura(px, py, g);
-        g.setColor(Color.BLACK);
+        g.setColor(Color.GREEN);
         dibujarFigura(px, py, g);
 
         // Parte C
         x = rotacionPuntoX(px, py, 100, 100, -310);
         y = rotacionPuntoY(px, py, 100, 100, -310);
         rellenarFigura(x, y, g);
-        g.setColor(Color.BLACK);
+        g.setColor(Color.GREEN);
         dibujarFigura(x, y, g);
 
         // Parte B
         x = rotacionPuntoX(px, py, 100, 100, 50);
         y = rotacionPuntoY(px, py, 100, 100, 50);
         rellenarFigura(x, y, g);
-        g.setColor(Color.BLACK);
+        g.setColor(Color.GREEN);
         dibujarFigura(x, y, g);
         
         // Parte A
         x = rotacionPuntoX(px, py, 100, 100, -45);
         y = rotacionPuntoY(px, py, 100, 100, -45);
         rellenarFigura(x, y, g);
-        g.setColor(Color.BLACK);
+        g.setColor(Color.GREEN);
         dibujarFigura(x, y, g);
     }
 }

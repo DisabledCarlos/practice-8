@@ -131,70 +131,6 @@ public class Transformacion extends JPanel {
     }
 
     /**
-     * Escalación de una figura sobre sus coordenadas de origen en eje X
-     * @param x Coordenadas de las x de la figura
-     * @param sx Escalación en X
-     */
-    private int[] escalacionOrigenX(int x[], float sx) {
-        int px[] = new int[x.length];
-
-        for(int i = 0; i < x.length; i++) {
-            px[i] = Math.round(x[i] * sx);
-        }
-
-        return px;
-    }
-
-    /**
-     * Escalación de una figura sobre sus coordenadas de origen en el eje Y
-     * @param y Coordenadas de las Y en la figura
-     * @param sy Escalación en Y
-     */
-    private int[] escalacionOrigenY(int y[], float sy) {
-        int py[] = new int[y.length];
-
-        for(int i = 0; i < y.length; i++) {
-            py[i] = Math.round(y[i] * sy);
-        }
-
-        return py;
-    }
-
-    /**
-     * Método encargado de hacer una rotación en el origen de
-     * las coordenadas
-     * @param x Coordenadas en X de la figura 
-     * @param y Coordenadas en Y de la figura 
-     * @param theta Angulo de rotación
-     */
-    private int[] rotacionOrigenX(int x[], int y[], int theta) {
-        int px[] = new int[x.length];
-
-        for(int i = 0; i < x.length; i++) {
-            px[i] = (int) (x[i] * Math.cos(theta) - y[i] * Math.sin(theta));
-        }
-
-        return px;
-    }
-
-    /**
-     * Método encargado de hacer una rotación en el origen de
-     * las coordenadas
-     * @param x Coordenadas en X de la figura 
-     * @param y Coordenadas en Y de la figura 
-     * @param theta Angulo de rotación
-     */
-    private int[] rotacionOrigenY(int x[], int y[], int theta) {
-        int py[] = new int[y.length];
-
-        for(int i = 0; i < x.length; i++) {
-            py[i] = (int) (x[i] * Math.sin(theta) + y[i] * Math.cos(theta));
-        }
-
-        return py;
-    }
-
-    /**
      * Método encargado de hacer la transformación de traslación en los puntos X
      * @param x Arreglo de las coordenadas X de la figura
      * @param tx Traslación en X
@@ -238,12 +174,11 @@ public class Transformacion extends JPanel {
         int y[] = new int[]{50, 50, 150, 150, 50};
 
         // Figura de cuadrado
+        g.setColor(Color.GREEN);
         dibujarFigura(x, y, g);
 
         x[0] = 125;
         y[4] = 125; 
-
-        g.setColor(Color.RED);
 
         // Parte A
         x = traslacionX(x, 25);

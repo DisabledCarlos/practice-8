@@ -134,8 +134,6 @@ public class Traslacion extends JPanel {
             pY[i] = ty + y[i];
         }
 
-        g.setColor(Color.RED);
-
         dibujarFigura(pX, pY, g);
     }
 
@@ -154,10 +152,12 @@ public class Traslacion extends JPanel {
             new int[]{-200, -200, -25, -25, -200}, g);
 
         // Traslación A
+        g.setColor(Color.RED);
         traslacion(new int[]{100, 300, 250, 150, 100}, 
             new int[]{-200, -200, -25, -25, -200}, 90, -150, g);
 
         // Traslación B
+        g.setColor(Color.GREEN);
         traslacion(new int[]{100, 300, 250, 150, 100}, 
             new int[]{-200, -200, -25, -25, -200}, -100, 70, g);
     }

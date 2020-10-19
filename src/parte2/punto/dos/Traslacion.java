@@ -118,25 +118,33 @@ public class Traslacion extends JPanel {
     }
 
     /**
-     * Método encargado de hacer la transformación de traslación
+     * Método encargado de hacer la transformación de traslación en los puntos X
      * @param x Arreglo de las coordenadas X de la figura
-     * @param y Arreglo de las coordenadas Y de la figura
      * @param tx Traslación en X
-     * @param ty Traslación en Y
-     * @param g Objeto Graphics
      */
-    private void traslacion(int x[], int y[], int tx, int ty, Graphics g) {
-        int pX[] = new int[x.length];
-        int pY[] = new int[y.length];
+    private int[] traslacionX(int x[], int tx) {
+        int px[] = new int[x.length];
 
         for(int i = 0; i < x.length; i++) {
-            pX[i] = tx + x[i];
-            pY[i] = ty + y[i];
+            px[i] = tx + x[i];
         }
 
-        g.setColor(Color.RED);
+        return px;
+    }
 
-        dibujarFigura(pX, pY, g);
+    /**
+     * Método encargado de hacer la transformación de traslación en los puntos Y
+     * @param y Arreglo de las coordenadas Y de la figura
+     * @param ty Traslación en Y
+     */
+    private int[] traslacionY(int y[], int ty) {
+        int py[] = new int[y.length];
+
+        for(int i = 0; i < y.length; i++) {
+            py[i] = ty + y[i];
+        }
+
+        return py;
     }
 
     /**
@@ -152,16 +160,25 @@ public class Traslacion extends JPanel {
         int x[] = new int[]{200, 400, 300, 100, 200};
         int y[] = new int[]{60, 60, 210, 210, 60};
 
-        // Rombo cudrante cuatro
+        // Rombo cudrante uno
         dibujarFigura(x, y, g);
 
         // Traslación A
-        traslacion(x, y, 0, 20, g);
+        g.setColor(Color.RED);
+        x = traslacionX(x, 0);
+        y = traslacionY(y, 20);
+        dibujarFigura(x, y, g);
 
         // Traslación B
-        traslacion(x, y, 20, -50, g);
+        g.setColor(Color.BLUE);
+        x = traslacionX(x, 20);
+        y = traslacionY(y, -50);
+        dibujarFigura(x, y, g);
 
         // Traslación C
-        traslacion(x, y, 30, 75, g);
+        g.setColor(Color.GREEN);
+        x = traslacionX(x, 30);
+        y = traslacionY(y, 75);
+        dibujarFigura(x, y, g);
     }
 }
