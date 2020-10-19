@@ -1,14 +1,5 @@
-## Getting Started
+## Práctica 8 - Graficación
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Este proyecto contiene la práctica 8 de la materia de graficación impartida en la carrera de Ing. en sistemas computacionales en el ITCG.
+La práctica se basa en las trasformaciones básicas que se le puede aplicar a una figura
 
-## Folder Structure
-
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-## Dependency Management
-
-The `JAVA DEPENDENCIES` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-pack/blob/master/release-notes/v0.9.0.md#work-with-jar-files-directly).
